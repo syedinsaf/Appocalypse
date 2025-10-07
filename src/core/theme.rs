@@ -43,53 +43,53 @@ impl Theme {
         match self {
             Self::Dark => ColorPalette {
                 base: BaseColors {
-                    background: color!(0x0d1117),    // Deeper, richer black
-                    foreground: color!(0x161b22),    // Slightly lighter surface
+                    background: color!(0x0d1117),    
+                    foreground: color!(0x161b22),    
                 },
                 normal: NormalColors {
-                    primary: color!(0x6e40c9),       // Vibrant purple
-                    surface: color!(0x8b949e),       // Better mid-tone gray
-                    error: color!(0xda3633),         // Brighter red
+                    primary: color!(0x6e40c9),      
+                    surface: color!(0x8b949e),     
+                    error: color!(0xda3633),        
                 },
                 bright: BrightColors {
-                    primary: color!(0xa371f7),       // Lighter purple for contrast
-                    secondary: color!(0x3fb950),     // Brighter green
-                    surface: color!(0xf0f6fc),       // Clean white
-                    error: color!(0xff7b72),         // Coral red
+                    primary: color!(0xa371f7),      
+                    secondary: color!(0x3fb950),   
+                    surface: color!(0xf0f6fc),       
+                    error: color!(0xff7b72),         
                 },
             },
             Self::Light => ColorPalette {
                 base: BaseColors {
-                    background: color!(0xffffff),    // Pure white
-                    foreground: color!(0xf6f8fa),    // Subtle gray
+                    background: color!(0xffffff),    
+                    foreground: color!(0xf6f8fa),    
                 },
                 normal: NormalColors {
-                    primary: color!(0x0969da),       // Professional blue
-                    surface: color!(0x57606a),       // Good contrast gray
-                    error: color!(0xcf222e),         // Strong red
+                    primary: color!(0x0969da),       
+                    surface: color!(0x57606a),       
+                    error: color!(0xcf222e),        
                 },
                 bright: BrightColors {
-                    primary: color!(0x0550ae),       // Deeper blue
-                    secondary: color!(0x1a7f37),     // Forest green
-                    surface: color!(0x24292f),       // Dark text
-                    error: color!(0xa40e26),         // Deep red
+                    primary: color!(0x0550ae),     
+                    secondary: color!(0x1a7f37),     
+                    surface: color!(0x24292f),      
+                    error: color!(0xa40e26),         
                 },
             },
             Self::Lupin => ColorPalette {
                 base: BaseColors {
-                    background: color!(0x282a36),    // Classic Dracula background
-                    foreground: color!(0x383a59),    // Subtle elevation
+                    background: color!(0x282a36),    
+                    foreground: color!(0x383a59),    
                 },
                 normal: NormalColors {
-                    primary: color!(0x6272a4),       // Muted purple-blue
-                    surface: color!(0xa2a4a3),       // Neutral gray
-                    error: color!(0xff5555),         // Dracula red
+                    primary: color!(0x6272a4),       
+                    surface: color!(0xa2a4a3),       
+                    error: color!(0xff5555),     
                 },
                 bright: BrightColors {
-                    primary: color!(0xbd93f9),       // Iconic Dracula purple
-                    secondary: color!(0x50fa7b),     // Dracula green
-                    surface: color!(0xf8f8f2),       // Dracula foreground
-                    error: color!(0xff6e6e),         // Lighter red accent
+                    primary: color!(0xbd93f9),       
+                    secondary: color!(0x50fa7b),     
+                    surface: color!(0xf8f8f2),       
+                    error: color!(0xff6e6e),         
                 },
             },
         }

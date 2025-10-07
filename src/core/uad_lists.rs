@@ -133,7 +133,6 @@ impl Opposite for PackageState {
     }
 }
 
-// Bad names. To be changed!
 #[derive(Default, Debug, Deserialize, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Removal {
     All,

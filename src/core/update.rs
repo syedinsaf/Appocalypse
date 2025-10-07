@@ -81,15 +81,12 @@ pub async fn download_update_to_temp_file(
         .ok_or(())?
         .join(format!("tmp_{bin_name}"));
 
-    // Path to temporarily force rename current process to, se we can then
-    // rename `download_path` to `current_bin_path` and then launch new version
-    // cleanly as `current_bin_path`
+
     let tmp_path = current_bin_path
         .parent()
         .ok_or(())?
         .join(format!("tmp2_{bin_name}"));
 
-    // MacOS and Linux release are gziped tarball
     #[cfg(not(target_os = "windows"))]
     {
         let asset_name = format!("{bin_name}.tar.gz");
@@ -116,7 +113,6 @@ pub async fn download_update_to_temp_file(
         std::fs::remove_file(&archive_path).map_err(|_| ())?;
     }
 
-    // For Windows we download the new binary directly
     #[cfg(target_os = "windows")]
     {
         let asset = release
@@ -132,7 +128,6 @@ pub async fn download_update_to_temp_file(
         }
     }
 
-    // Make the file executable
     #[cfg(not(target_os = "windows"))]
     {
         use std::os::unix::fs::PermissionsExt;
@@ -162,9 +157,6 @@ pub fn get_latest_release() -> Result<Option<Release>, ()> {
     Ok(None)
 }
 
-// UAD only has pre-releases so we can't use
-// https://api.github.com/repos/0x192/universal-android-debloater/releases/latest
-// to only get the latest release
 #[cfg(feature = "self-update")]
 pub fn get_latest_release() -> Result<Option<Release>, ()> {
     debug!("Checking for UAD update");
@@ -242,9 +234,7 @@ where
     F: AsRef<Path>,
     T: AsRef<Path>,
 {
-    // 21 Fibonacci steps starting at 1 ms is ~28 seconds total
-    // See https://github.com/rust-lang/rustup/pull/1873 where this was used by Rustup to work around
-    // virus scanning file locks
+
     let from = from.as_ref();
     let to = to.as_ref();
 
@@ -265,9 +255,7 @@ pub fn remove_file<P>(path: P) -> Result<(), String>
 where
     P: AsRef<Path>,
 {
-    // 21 Fibonacci steps starting at 1 ms is ~28 seconds total
-    // See https://github.com/rust-lang/rustup/pull/1873 where this was used by Rustup to work around
-    // virus scanning file locks
+
     let path = path.as_ref();
 
     retry(
