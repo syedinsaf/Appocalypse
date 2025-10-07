@@ -40,7 +40,7 @@ pub enum Message {
     BackupDevice,
     RestoreDevice,
     RestoringDevice(Result<CommandType, ()>),
-    DeviceBackedUp(Result<(), String>),
+    DeviceBackedUp,
 }
 
 impl Settings {
@@ -127,9 +127,9 @@ impl Settings {
                     self.device.device_id.clone(),
                     packages.to_vec(),
                 ),
-                Message::DeviceBackedUp,
+                |_| Message::DeviceBackedUp,
             ),
-            Message::DeviceBackedUp(_) => {
+            Message::DeviceBackedUp => {
                 info!("[BACKUP] Backup successfully created");
                 self.device.backup.backups =
                     list_available_backups(&BACKUP_DIR.join(phone.adb_id.clone()));
@@ -182,7 +182,7 @@ impl Settings {
         }
     }
 
-    pub fn view(&self, phone: &Phone) -> Element<Message, Renderer<Theme>> {
+    pub fn view(&self, phone: &Phone) -> Element<'_, Message, Renderer<Theme>> {
         let radio_btn_theme = Theme::ALL
             .iter()
             .fold(row![].spacing(10), |column, option| {

@@ -17,7 +17,6 @@ pub struct BaseColors {
 #[derive(Debug, Clone, Copy)]
 pub struct NormalColors {
     pub primary: Color,
-    pub secondary: Color,
     pub surface: Color,
     pub error: Color,
 }
@@ -39,60 +38,58 @@ pub struct ColorPalette {
 
 impl Theme {
     pub const ALL: [Self; 3] = [Self::Lupin, Self::Dark, Self::Light];
+    
     pub fn palette(self) -> ColorPalette {
         match self {
             Self::Dark => ColorPalette {
                 base: BaseColors {
-                    background: color!(0x111111),
-                    foreground: color!(0x1C1C1C),
+                    background: color!(0x0d1117),    // Deeper, richer black
+                    foreground: color!(0x161b22),    // Slightly lighter surface
                 },
                 normal: NormalColors {
-                    primary: color!(0x5E4266),
-                    secondary: color!(0x386e50),
-                    surface: color!(0x828282),
-                    error: color!(0x992B2B),
+                    primary: color!(0x6e40c9),       // Vibrant purple
+                    surface: color!(0x8b949e),       // Better mid-tone gray
+                    error: color!(0xda3633),         // Brighter red
                 },
                 bright: BrightColors {
-                    primary: color!(0xBA84FC),
-                    secondary: color!(0x49eb7a),
-                    surface: color!(0xE0E0E0),
-                    error: color!(0xC13047),
+                    primary: color!(0xa371f7),       // Lighter purple for contrast
+                    secondary: color!(0x3fb950),     // Brighter green
+                    surface: color!(0xf0f6fc),       // Clean white
+                    error: color!(0xff7b72),         // Coral red
                 },
             },
             Self::Light => ColorPalette {
                 base: BaseColors {
-                    background: color!(0xEEEEEE),
-                    foreground: color!(0xE0E0E0),
+                    background: color!(0xffffff),    // Pure white
+                    foreground: color!(0xf6f8fa),    // Subtle gray
                 },
                 normal: NormalColors {
-                    primary: color!(0x230F08),
-                    secondary: color!(0xF9D659),
-                    surface: color!(0x818181),
-                    error: color!(0x992B2B),
+                    primary: color!(0x0969da),       // Professional blue
+                    surface: color!(0x57606a),       // Good contrast gray
+                    error: color!(0xcf222e),         // Strong red
                 },
                 bright: BrightColors {
-                    primary: color!(0x673AB7),
-                    secondary: color!(0x3797A4),
-                    surface: color!(0x000000),
-                    error: color!(0xC13047),
+                    primary: color!(0x0550ae),       // Deeper blue
+                    secondary: color!(0x1a7f37),     // Forest green
+                    surface: color!(0x24292f),       // Dark text
+                    error: color!(0xa40e26),         // Deep red
                 },
             },
             Self::Lupin => ColorPalette {
                 base: BaseColors {
-                    background: color!(0x282a36),
-                    foreground: color!(0x353746),
+                    background: color!(0x282a36),    // Classic Dracula background
+                    foreground: color!(0x383a59),    // Subtle elevation
                 },
                 normal: NormalColors {
-                    primary: color!(0x58406F),
-                    secondary: color!(0x386e50),
-                    surface: color!(0xa2a4a3),
-                    error: color!(0xA13034),
+                    primary: color!(0x6272a4),       // Muted purple-blue
+                    surface: color!(0xa2a4a3),       // Neutral gray
+                    error: color!(0xff5555),         // Dracula red
                 },
                 bright: BrightColors {
-                    primary: color!(0xbd94f9),
-                    secondary: color!(0x49eb7a),
-                    surface: color!(0xf4f8f3),
-                    error: color!(0xE63E6D),
+                    primary: color!(0xbd93f9),       // Iconic Dracula purple
+                    secondary: color!(0x50fa7b),     // Dracula green
+                    surface: color!(0xf8f8f2),       // Dracula foreground
+                    error: color!(0xff6e6e),         // Lighter red accent
                 },
             },
         }

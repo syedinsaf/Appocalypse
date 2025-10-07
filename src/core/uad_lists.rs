@@ -6,6 +6,7 @@ use serde_json;
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::io::Read;
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Hash, Eq)]
 #[serde(rename_all = "camelCase")]
@@ -185,7 +186,8 @@ pub fn load_debloat_lists(remote: bool) -> (Result<PackageHashMap, PackageHashMa
             .call()
             {
                 Ok(data) => {
-                    let text = data.into_string().expect("response should be Ok type");
+                    let mut text = String::new();
+                    data.into_body().as_reader().read_to_string(&mut text).expect("response should be Ok type");
                     fs::write(cached_uad_lists.clone(), &text).expect("Unable to write file");
                     let list = serde_json::from_str(&text).expect("Unable to parse");
                     OperationResult::Ok(list)

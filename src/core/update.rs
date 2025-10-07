@@ -50,7 +50,6 @@ impl std::fmt::Display for SelfUpdateStatus {
     }
 }
 
-/// Download a file from the internet
 #[cfg(feature = "self-update")]
 pub async fn download_file<T: ToString + Send>(url: T, dest_file: PathBuf) -> Result<(), String> {
     let url = url.to_string();
@@ -60,7 +59,7 @@ pub async fn download_file<T: ToString + Send>(url: T, dest_file: PathBuf) -> Re
         Ok(res) => {
             let mut file = fs::File::create(dest_file).map_err(|e| e.to_string())?;
 
-            if let Err(e) = copy(&mut res.into_reader(), &mut file) {
+            if let Err(e) = copy(&mut res.into_body().as_reader(), &mut file) {
                 return Err(e.to_string());
             }
         }
@@ -69,9 +68,6 @@ pub async fn download_file<T: ToString + Send>(url: T, dest_file: PathBuf) -> Re
     Ok(())
 }
 
-/// Downloads the latest release file that matches `bin_name`, renames the current
-/// executable to a temp path, renames the new version as the original file name,
-/// then returns both the original file name (new version) and temp path (old version)
 #[cfg(feature = "self-update")]
 pub async fn download_update_to_temp_file(
     bin_name: String,
@@ -178,7 +174,7 @@ pub fn get_latest_release() -> Result<Option<Release>, ()> {
     {
         Ok(res) => {
             let release: Release = serde_json::from_value(
-                res.into_json::<serde_json::Value>()
+                res.into_body().read_json::<serde_json::Value>()
                     .map_err(|_| ())?
                     .get(0)
                     .ok_or(())?
@@ -200,7 +196,6 @@ pub fn get_latest_release() -> Result<Option<Release>, ()> {
     }
 }
 
-/// Extracts the binary from a `tar.gz` archive to `temp_file` path
 #[cfg(feature = "self-update")]
 #[cfg(not(target_os = "windows"))]
 pub fn extract_binary_from_tar(archive_path: &Path, temp_file: &Path) -> io::Result<()> {
@@ -223,8 +218,6 @@ pub fn extract_binary_from_tar(archive_path: &Path, temp_file: &Path) -> io::Res
     Err(io::ErrorKind::NotFound.into())
 }
 
-/// Hardcoded binary names for each compilation target
-/// that gets published to the Github Release
 #[cfg(feature = "self-update")]
 pub const fn bin_name() -> &'static str {
     #[cfg(target_os = "windows")]
@@ -243,10 +236,6 @@ pub const fn bin_name() -> &'static str {
     }
 }
 
-/// Rename a file or directory to a new name, retrying if the operation fails because of permissions
-///
-/// Will retry for ~30 seconds with longer and longer delays between each, to allow for virus scan
-/// and other automated operations to complete.
 #[cfg(feature = "self-update")]
 pub fn rename<F, T>(from: F, to: T) -> Result<(), String>
 where
@@ -271,10 +260,6 @@ where
     .map_err(|e| e.to_string())
 }
 
-/// Remove a file, retrying if the operation fails because of permissions
-///
-/// Will retry for ~30 seconds with longer and longer delays between each, to allow for virus scan
-/// and other automated operations to complete.
 #[cfg(feature = "self-update")]
 pub fn remove_file<P>(path: P) -> Result<(), String>
 where

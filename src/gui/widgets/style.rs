@@ -339,16 +339,9 @@ impl text_input::StyleSheet for Theme {
         self.palette().normal.primary
     }
 
-    /// Produces the style of an hovered text input.
     fn hovered(&self, style: &Self::Style) -> text_input::Appearance {
         self.focused(style)
     }
-}
-
-#[derive(Default, Debug, Clone, Copy)]
-pub enum PickList {
-    #[default]
-    Default,
 }
 
 impl menu::StyleSheet for Theme {

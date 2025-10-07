@@ -26,9 +26,9 @@ impl About {
         }
         // other events are handled by UadGui update()
     }
-    pub fn view(&self, update_state: &UpdateState) -> Element<Message, Renderer<Theme>> {
+    pub fn view(&self, update_state: &UpdateState) -> Element<'_, Message, Renderer<Theme>> {
         let about_text = text(
-            "Universal Android Debloater (UAD) is a Free and Open-Source community project aiming at simplifying \
+            "'Appocalypse' is an Android Debloat Manager is a Free and Open-Source community project aiming at simplifying \
             the removal of pre-installed apps on any Android device.",
         );
 
@@ -100,14 +100,14 @@ impl About {
 
         let website_btn = button("Github page")
             .on_press(Message::UrlPressed(PathBuf::from(
-                "https://github.com/0x192/universal-android-debloater",
+                "https://github.com/syedinsaf/Appocalypse",
             )))
             .padding(5)
             .style(style::Button::Primary);
 
         let issue_btn = button("Have an issue?")
             .on_press(Message::UrlPressed(PathBuf::from(
-                "https://github.com/0x192/universal-android-debloater/issues",
+                "https://github.com/syedinsaf/Appocalypse/issues",
             )))
             .padding(5)
             .style(style::Button::Primary);
@@ -117,14 +117,7 @@ impl About {
             .padding(5)
             .style(style::Button::Primary);
 
-        let wiki_btn = button("Wiki")
-            .on_press(Message::UrlPressed(PathBuf::from(
-                "https://github.com/0x192/universal-android-debloater/wiki",
-            )))
-            .padding(5)
-            .style(style::Button::Primary);
-
-        let row = row![website_btn, wiki_btn, issue_btn, log_btn,].spacing(20);
+        let row = row![website_btn, issue_btn, log_btn,].spacing(20);
 
         let content = column![
             Space::new(Length::Fill, Length::Shrink),

@@ -1,9 +1,9 @@
-# Universal Android Debloater GUI
+# Appocalypse - Android Debloat Manager GUI.
 
 **DISCLAIMER**: Use at your own risk. I am not responsible for anything that
 could happen to your phone.
 
-<img src="/resources/screenshots/v0.5.0.png" width="850" alt="uad_screenshot">
+<img src="/resources/screenshots/v0.6.0.png" width="850" alt="uad_screenshot">
 
 **This software is still in an early stage of development. Check out the issues, and feel free to contribute!**
 
@@ -33,7 +33,7 @@ That's the main point, right?
 
 NB : System apps cannot truly be uninstalled without root (see the [FAQ](https://github.com/0x192/universal-android-debloater/wiki/FAQ))
 
-## Universal Debloat Lists
+## Debloat Lists
 
 - [x] GFAM (Google/Facebook/Amazon/Microsoft)
 - [x] AOSP

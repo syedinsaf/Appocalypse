@@ -23,7 +23,6 @@ struct UserBackup {
     packages: Vec<CorePackage>,
 }
 
-// Backup all `Uninstalled` and `Disabled` packages
 pub async fn backup_phone(
     users: Vec<User>,
     device_id: String,
